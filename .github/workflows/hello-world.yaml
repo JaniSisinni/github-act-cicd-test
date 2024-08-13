@@ -1,0 +1,28 @@
+# .github/workflows/hello-world.yml
+
+name: Docker Hello World
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: docker build -t hello-world-docker .
+
+      - name: Run Docker container
+        run: docker run hello-world-docker
